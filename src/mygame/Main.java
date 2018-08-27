@@ -14,6 +14,12 @@ import com.jme3.scene.Mesh;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.debug.Arrow;
 import com.jme3.system.AppSettings;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import mygame.utils.Avatar;
 import mygame.utils.MyStateManager;
 
 
@@ -37,6 +43,17 @@ public class Main extends SimpleApplication {
         AppSettings settings = new AppSettings(true);
         settings.setTitle("jMonkey 3.2");
         //settings.setSettingsDialogImage("Interface/logic-excavator.png");
+        try
+        {
+            
+            BufferedImage[] icon = new BufferedImage[] {
+            ImageIO.read( Avatar.class.getResource( "favicon.png" ) ) };
+            settings.setIcons(icon);
+        } catch (IOException ex)
+        {
+            System.out.println("Error load favicon");
+        }
+        
         settings.setHeight(720);
         settings.setWidth(1280);
 
