@@ -6,6 +6,7 @@
 package mygame.utils;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
@@ -20,10 +21,10 @@ public class Avatar {
     RigidBodyControl phyAvatar;
     public Avatar(SimpleApplication app ){
         this.app = app;
-        objectAvatar = app.getAssetManager().loadModel("Models/cubic/cubic.j3o");
+        objectAvatar = app.getAssetManager().loadModel("Models/Player/Player.j3o");
         app.getRootNode().attachChild(objectAvatar);
         objectAvatar.setLocalTranslation(new Vector3f(0.5f,0.5f,0.5f));
-        phyAvatar = new RigidBodyControl( 2.0f );
+        phyAvatar = new RigidBodyControl( new CapsuleCollisionShape(1 , 2) , 2.0f );
        
     }
     

@@ -16,8 +16,7 @@ import com.jme3.scene.debug.Arrow;
 import com.jme3.system.AppSettings;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.jme3.cursors.plugins.JmeCursor;
 import javax.imageio.ImageIO;
 import mygame.utils.Avatar;
 import mygame.utils.MyStateManager;
@@ -74,8 +73,8 @@ public class Main extends SimpleApplication {
         //setDisplayStatView(false);
         flyCam.setEnabled(false);
         inputManager.setCursorVisible(true);
-        //JmeCursor jc = (JmeCursor) assetManager.loadAsset("tonegod/gui/style/def/Common/Cursors/Pointer.cur");
-        //inputManager.setMouseCursor(jc);
+        JmeCursor jc = (JmeCursor) assetManager.loadAsset("Interface/cursorPointing.cur");
+        inputManager.setMouseCursor(jc);
         this.setPauseOnLostFocus(false);
         
         BulletAppState bulletApp = new BulletAppState();
