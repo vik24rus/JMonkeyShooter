@@ -23,11 +23,11 @@ import com.jme3.scene.control.AbstractControl;
  *
  * @author vik24rus
  */
-public class AvatarControl extends AbstractControl {
+public class avatarCameraInputControl extends AbstractControl {
     SimpleApplication app;
     CameraNode cameranode;
     Spatial objectAvatar;
-    public AvatarControl (SimpleApplication app , Spatial objectAvatar){
+    public avatarCameraInputControl (SimpleApplication app , Spatial objectAvatar){
         this.app = app;
         this.objectAvatar = objectAvatar;
         initKeys();

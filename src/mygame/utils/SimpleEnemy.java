@@ -6,6 +6,7 @@
 package mygame.utils;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.bullet.BulletAppState;
 
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.math.Vector3f;
@@ -19,19 +20,30 @@ public class SimpleEnemy {
     Spatial objectSimpleEnemy;
     SimpleApplication app;
     RigidBodyControl phySimpleEnemy;
-    public SimpleEnemy(SimpleApplication app ){
+    BulletAppState bulletApp; 
+    
+    public SimpleEnemy(SimpleApplication app , BulletAppState bulletApp){
         this.app = app;
+        this.bulletApp= bulletApp;
         objectSimpleEnemy = app.getAssetManager().loadModel("Models/cubic/cubic.j3o");
-        app.getRootNode().attachChild(objectSimpleEnemy);
         objectSimpleEnemy.setLocalTranslation(new Vector3f(3,5,1));
-        phySimpleEnemy = new RigidBodyControl( 1.0f );
+        addPhysics();
+        
         
     }
+    
+    private void addPhysics(){
+        phySimpleEnemy = new RigidBodyControl( 1.0f );
+        objectSimpleEnemy.addControl(phySimpleEnemy);
+        phySimpleEnemy.setPhysicsSpace(bulletApp.getPhysicsSpace());
+    }
+    
     public Spatial getObjectSimpleEnemy(){
         return objectSimpleEnemy;
     }
     
-    public RigidBodyControl getphySimpleEnemy(){
-        return phySimpleEnemy;
+    private void delEnemy(){ //TODO при удалении нужно RootNode().detachChild + удалить все остальное (control+physic)
+    
     }
+    
 }

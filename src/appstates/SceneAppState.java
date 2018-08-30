@@ -9,7 +9,6 @@ import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.bullet.BulletAppState;
-import controls.AvatarControl;
 import mygame.utils.Avatar;
 import mygame.utils.SceneLevel1;
 import mygame.utils.SimpleEnemy;
@@ -25,7 +24,7 @@ public class SceneAppState  extends BaseAppState {
     SceneLevel1 sceneLevel1;
     Avatar avatar;
     SimpleEnemy simpleEnemy;
-    AvatarControl avatarControl;
+    
     public SceneAppState(BulletAppState bulletApp){
         this.bulletApp = bulletApp;
     }
@@ -35,10 +34,9 @@ public class SceneAppState  extends BaseAppState {
     {
         this.app = (SimpleApplication) app;
         
-        sceneLevel1 = new SceneLevel1(this.app );   
-        avatar = new Avatar (this.app);
-        avatarControl = new AvatarControl(this.app , avatar.getObjectAvatar());
-        simpleEnemy = new SimpleEnemy (this.app);
+        sceneLevel1 = new SceneLevel1(this.app , this.bulletApp);   
+        avatar = new Avatar (this.app , this.bulletApp);
+        simpleEnemy = new SimpleEnemy (this.app , this.bulletApp);
         
         
     }
@@ -53,28 +51,15 @@ public class SceneAppState  extends BaseAppState {
     protected void onEnable()
     {
         app.getRootNode().attachChild(sceneLevel1.getObjectFloor());
-        sceneLevel1.getObjectFloor().addControl(sceneLevel1.getphyFloor());
-        sceneLevel1.getphyFloor().setPhysicsSpace(bulletApp.getPhysicsSpace());
-        
-        app.getRootNode().attachChild(avatar.getObjectAvatar());
-        avatar.getObjectAvatar().addControl(avatar.getphyAvatar());
-        avatar.getObjectAvatar().addControl(avatarControl);
-        avatar.getphyAvatar().setPhysicsSpace(bulletApp.getPhysicsSpace());
-        avatar.getphyAvatar().setKinematic(true) ;
-        
-        app.getRootNode().attachChild(simpleEnemy.getObjectSimpleEnemy());
-        simpleEnemy.getObjectSimpleEnemy().addControl(simpleEnemy.getphySimpleEnemy());
-        simpleEnemy.getphySimpleEnemy().setPhysicsSpace(bulletApp.getPhysicsSpace());
-        
+        app.getRootNode().attachChild(avatar.getObjectAvatar()); 
+        app.getRootNode().attachChild(simpleEnemy.getObjectSimpleEnemy());  
 
     }
 
     @Override
     protected void onDisable()
     {
-//        app.getRootNode().detachChild(sceneLevel1.getObjectFloor());
-//        sceneLevel1.getObjectFloor().removeControl(sceneLevel1.getphyFloor());
-//        sceneLevel1.getphyFloor().getPhysicsSpace().destroy();
+
     }
     
     @Override
